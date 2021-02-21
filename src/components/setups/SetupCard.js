@@ -21,7 +21,7 @@ const TrackCard = ({id, name, location, length, lapRecord}) => {
           <AmplifyS3Image style={{"--width": "100%"}} path={generateImagePath()} />
         }
         actions={[
-          <Link to={`/tracks/${id}`}>
+          <Link to={`/setups/${id}`}>
             <InfoCircleOutlined /> 
           </Link>
         ]}

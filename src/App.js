@@ -2,8 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import { Layout } from 'antd'
-import CarsPage from './components/cars/CarsPage'
-import TrackList from './components/tracks/TracksPage'
+import { CarsPage, LiveriesPage, TracksPage, SetupsPage } from './components/pages'
 import Navigation from './components/navigation'
 import './App.less';
 
@@ -22,13 +21,13 @@ const App = () => {
             <CarsPage />
           </Route>
           <Route path="/tracks">
-            <TrackList />
+            <TracksPage />
           </Route>
           <Route path="/liveries">
-            <CarsPage />
+            <LiveriesPage />
           </Route>
           <Route path="/setups">
-            <CarsPage />
+            <SetupsPage />
           </Route>
           <Route path="/">
             <div>Home Page</div>

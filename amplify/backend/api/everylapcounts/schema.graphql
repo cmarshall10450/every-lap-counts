@@ -1,22 +1,227 @@
 enum CarClass {
-  ID
-  GTTHREE
-  GTFOUR
+	GTTHREE
+	GTFOUR
 }
 
-type Car @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  make: String!
-  model: String!
-  year: Int
-  class: CarClass!
+enum LiveryLayer {
+	DECALS
+	SPONSORS
 }
 
-type Track @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  name: String!
-  location: String
-  length: String
-  lapRecord: String
+enum TyreCompound {
+	DRY
+	WET
 }
- 
+
+type Setup
+	@model
+	@auth(rules: [{ allow: private }])
+	@key(name: "byCar", fields: ["carID"])
+	@key(name: "byTrack", fields: ["trackID"]) {
+	id: ID!
+	name: String
+	carID: ID!
+	trackID: ID!
+	tyres: TyreSetup!
+	electronics: ElectronicsSetup!
+	mechanicalGrip: MechanicalGripSetup!
+	dampers: DampersSetup!
+	aero: AeroSetup!
+	car: Car @connection(fields: ["carID"])
+	track: Track @connection(fields: ["trackID"])
+}
+
+type TyrePressure {
+	frontLeft: Float!
+	frontRight: Float!
+	rearLeft: Float!
+	rearRight: Float!
+}
+
+type TyreToe {
+	frontLeft: Float!
+	frontRight: Float!
+	rearLeft: Float!
+	rearRight: Float!
+}
+
+type TyreCamber {
+	frontLeft: Float!
+	frontRight: Float!
+	rearLeft: Float!
+	rearRight: Float!
+}
+
+type TyreCaster {
+	left: Float!
+	right: Float!
+}
+
+type TyreSetup {
+	compound: TyreCompound!
+	pressure: TyrePressure!
+	toe: TyreToe!
+	camber: TyreCamber!
+	caster: TyreCaster!
+}
+
+type ElectronicsSetup {
+	tc: Int!
+	abs: Int!
+	ecuMap: Int!
+	tc2: Int
+}
+
+type MechanicalGripAntirollBar {
+	front: Int!
+	rear: Int!
+}
+
+type MechanicalGripWheelRate {
+	frontLeft: Int!
+	frontRight: Int!
+	rearLeft: Int!
+	rearRight: Int!
+}
+
+type MechanicalGripBumpRate {
+	frontLeft: Int!
+	frontRight: Int!
+	rearLeft: Int!
+	rearRight: Int!
+}
+
+type MechanicalGripBumpRange {
+	frontLeft: Int!
+	frontRight: Int!
+	rearLeft: Int!
+	rearRight: Int!
+}
+
+type MechanicalGripSetup {
+	antirollBar: MechanicalGripAntirollBar!
+	preload: Int!
+	brakePower: Int!
+	brakeBias: Float!
+	steerRatio: Int!
+	wheelRate: MechanicalGripWheelRate!
+	bumpStopRate: MechanicalGripBumpRate!
+	bumpStopRange: MechanicalGripBumpRange!
+}
+
+type DampersBump {
+	frontLeft: Int!
+	frontRight: Int!
+	rearLeft: Int!
+	rearRight: Int!
+}
+
+type DampersFastBump {
+	frontLeft: Int!
+	frontRight: Int!
+	rearLeft: Int!
+	rearRight: Int!
+}
+
+type DampersRebound {
+	frontLeft: Int!
+	frontRight: Int!
+	rearLeft: Int!
+	rearRight: Int!
+}
+
+type DampersFastRebound {
+	frontLeft: Int!
+	frontRight: Int!
+	rearLeft: Int!
+	rearRight: Int!
+}
+
+type DampersSetup {
+	bump: DampersBump!
+	fastBump: DampersFastBump!
+	rebound: DampersRebound!
+	fastRebound: DampersFastRebound!
+}
+
+type AeroRideHeight {
+	front: Int!
+	rear: Int!
+}
+
+type AeroBrakeDucts {
+	front: Int!
+	rear: Int!
+}
+
+type AeroSetup {
+	rideHeight: AeroRideHeight!
+	brakeDucts: AeroBrakeDucts!
+	splitter: Int!
+	wing: Int!
+}
+
+type LiveryMaterial @model @auth(rules: [{ allow: private }]) {
+	id: ID!
+	baseRoughness: Float
+	clearCoat: Float
+	clearCoatRoughness: Float
+	metallic: Float
+	layerType: LiveryLayer
+}
+
+type Livery @model @auth(rules: [{ allow: private }]) {
+	id: ID!
+	carGuid: Int
+	teamGuid: Int
+	raceNumber: Int
+	raceNumberPadding: Int
+	auxLightKey: Int
+	auxLightKeyColor: Int
+	skinTemplateKey: Int
+	skinColor1Id: Int
+	skinColor2Id: Int
+	skinColor3Id: Int
+	sponsorId: Int
+	skinMaterialType1: Int
+	skinMaterialType2: Int
+	skinMaterialType3: Int
+	rimColor1Id: Int
+	rimColor2Id: Int
+	rimMaterialType1: Int
+	rimMaterialType2: Int
+	teamName: String!
+	nationality: Int
+	displayName: String
+	competitorName: String
+	competitorNationality: Int
+	teamTemplateKey: Int
+	carModelType: Int
+	cupCategory: Int
+	licenceType: Int
+	useEnduranceKit: Int
+	customSkinName: String!
+	bannerTemplateKey: Int
+	decalLiveryMaterialId: ID!
+	sponsorLiveryMaterialId: ID!
+	decalLiveryMaterial: LiveryMaterial @connection
+	sponsorLiveryMaterial: LiveryMaterial @connection
+}
+
+type Car @model @auth(rules: [{ allow: private }]) {
+	id: ID!
+	make: String!
+	model: String!
+	year: Int
+	class: CarClass!
+	setups: [Setup] @connection(keyName: "byCar", fields: ["id"])
+}
+
+type Track @model @auth(rules: [{ allow: private }]) {
+	id: ID!
+	name: String!
+	location: String
+	length: String
+	lapRecord: String
+	setups: [Setup] @connection(keyName: "byTrack", fields: ["id"])
+}

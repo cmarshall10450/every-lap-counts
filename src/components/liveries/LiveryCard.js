@@ -6,7 +6,7 @@ import { AmplifyS3Image } from "@aws-amplify/ui-react"
 
 const { Meta } = Card;
 
-const TrackCard = ({id, name, location, length, lapRecord}) => {
+const LiveryCard = ({id, name, location, length, lapRecord}) => {
 
   const generateImagePath = () => {
     const fileType = "png"
@@ -34,4 +34,4 @@ const TrackCard = ({id, name, location, length, lapRecord}) => {
   )
 }
 
-export default TrackCard
+export default LiveryCard
