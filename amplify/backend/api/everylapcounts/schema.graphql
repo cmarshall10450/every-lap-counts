@@ -1,0 +1,22 @@
+enum CarClass {
+  ID
+  GTTHREE
+  GTFOUR
+}
+
+type Car @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  make: String!
+  model: String!
+  year: Int
+  class: CarClass!
+}
+
+type Track @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  name: String!
+  location: String
+  length: String
+  lapRecord: String
+}
+ 

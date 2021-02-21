@@ -1,0 +1,33 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-everylapcounts-dev-183130-authRole",
+      "UnauthRoleArn": "arn:aws:iam::463559647631:role/amplify-everylapcounts-dev-183130-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::463559647631:role/amplify-everylapcounts-dev-183130-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-everylapcounts-dev-183130-deployment",
+      "UnauthRoleName": "amplify-everylapcounts-dev-183130-unauthRole",
+      "StackName": "amplify-everylapcounts-dev-183130",
+      "StackId": "arn:aws:cloudformation:eu-west-1:463559647631:stack/amplify-everylapcounts-dev-183130/ae499230-72e0-11eb-b4cb-0a918499f7cd",
+      "AmplifyAppId": "dhmzb6s4xtl6r"
+    },
+    "categories": {
+      "function": {
+        "everyLapCountsCustomMessage": {
+          "REDIRECTURL": "http://localhost:3000",
+          "EMAILSUBJECT": "",
+          "EMAILMESSAGE": ""
+        },
+        "everyLapCountsPostConfirmation": {
+          "GROUP": "leagueRacers"
+        },
+        "everyLapCountsPreSignup": {
+          "DOMAINBLACKLIST": ""
+        }
+      },
+      "auth": {
+        "everyLapCounts": {}
+      }
+    }
+  }
+}

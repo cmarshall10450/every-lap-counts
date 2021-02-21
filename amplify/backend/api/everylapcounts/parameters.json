@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "everylapcounts",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "autheveryLapCounts",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
